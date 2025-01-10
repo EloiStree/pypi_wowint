@@ -1,7 +1,7 @@
 # https://buymeacoffee.com/apintio
 
 
-import iid42
+import wowint
 import re
 import struct
 import random
@@ -33,10 +33,10 @@ class WowIntegerTarget:
         self.target = SendUdpIID(ipv4, port, use_ntp)
         
     def press_key_int(self, press_key:int, delay_in_millisecond:int = 0.0):
-        self.target.push_bytes(iid42.iid_ms(self.index,press_key,delay_in_millisecond))
+        self.target.push_bytes(wowint.iid_ms(self.index,press_key,delay_in_millisecond))
     
     def release_key_int(self, press_key:int, delay_in_millisecond:int = 0.0):
-        self.target.push_bytes(iid42.iid_ms(self.index,press_key+1000,delay_in_millisecond))
+        self.target.push_bytes(wowint.iid_ms(self.index,press_key+1000,delay_in_millisecond))
     
     def press_then_release_key_int(self, press_key:int, delay_in_milliseconds:int = 0, press_duration_milliseconds:int = 0):
         self.press_key_int(press_key,delay_in_milliseconds)
@@ -47,13 +47,13 @@ class WowIntegerTarget:
         
         
 
-        
+"""
+Reference of the integer of the keyboard.
+It allows to give a request of what to do on the remote computer.
+The enum is based on window keyboard.
+"""   
 class WowIntegerKeyboard:
-        """
-        Reference of the integer of the keyboard.
-        It allows to give a request of what to do on the remote computer.
-        The enum is based on window keyboard.
-        """
+        
     
         jump:int = 1032
         numpad_0:int = 1096
@@ -178,6 +178,97 @@ class WowIntegerKeyboard:
         zoom:int = 1251
         
         
+        
+        
+
+"""
+Represent mapping to remote control a xbox gamepad with event.
+"""
+class XboxIntegerAction:
+            random_input =  1399
+            release_all =  1390
+            release_all_but_menu =  1391
+            clear_timed_command = 1398
+            press_a =  1300
+            press_x =  1301
+            press_b =  1302
+            press_y =  1303
+            press_left_side_button =  1304
+            press_right_side_button =  1305
+            press_left_stick =  1306
+            press_right_stick =  1307
+            press_menu_right =  1308
+            press_menu_left =  1309
+            release_dpad =  1310
+            press_arrow_north =  1311
+            press_arrow_northeast =  1312
+            press_arrow_east =  1313
+            press_arrow_southeast =  1314
+            press_arrow_south =  1315
+            press_arrow_southwest =  1316
+            press_arrow_west =  1317
+            press_arrow_northwest =  1318
+            press_xbox_home_button =  1319
+            random_axis =  1320
+            start_recording =  1321
+            set_left_stick_neutral =  1330
+            set_left_stick_up =  1331
+            set_left_stick_up_right =  1332
+            set_left_stick_right =  1333
+            set_left_stick_down_right =  1334
+            set_left_stick_down =  1335
+            set_left_stick_down_left =  1336
+            set_left_stick_left =  1337
+            set_left_stick_up_left =  1338
+            set_right_stick_neutral =  1340
+            set_right_stick_up =  1341
+            set_right_stick_up_right =  1342
+            set_right_stick_right =  1343
+            set_right_stick_down_right =  1344
+            set_right_stick_down =  1345
+            set_right_stick_down_left =  1346
+            set_right_stick_left =  1347
+            set_right_stick_up_left =  1348
+            set_left_stick_horizontal_100 =  1350
+            set_left_stick_horizontal_neg_100 =  1351
+            set_left_stick_vertical_100 =  1352
+            set_left_stick_vertical_neg_100 =  1353
+            set_right_stick_horizontal_100 =  1354
+            set_right_stick_horizontal_neg_100 =  1355
+            set_right_stick_vertical_100 =  1356
+            set_right_stick_vertical_neg_100 =  1357
+            set_left_trigger_100 =  1358
+            set_right_trigger_100 =  1359
+            set_left_stick_horizontal_075 =  1360
+            set_left_stick_horizontal_neg_075 =  1361
+            set_left_stick_vertical_075 =  1362
+            set_left_stick_vertical_neg_075 =  1363
+            set_right_stick_horizontal_075 =  1364
+            set_right_stick_horizontal_neg_075 =  1365
+            set_right_stick_vertical_075 =  1366
+            set_right_stick_vertical_neg_075 =  1367
+            set_left_trigger_075 =  1368
+            set_right_trigger_075 =  1369
+            set_left_stick_horizontal_050 =  1370
+            set_left_stick_horizontal_neg_050 =  1371
+            set_left_stick_vertical_050 =  1372
+            set_left_stick_vertical_neg_050 =  1373
+            set_right_stick_horizontal_050 =  1374
+            set_right_stick_horizontal_neg_050 =  1375
+            set_right_stick_vertical_050 =  1376
+            set_right_stick_vertical_neg_050 =  1377
+            set_left_trigger_050 =  1378
+            set_right_trigger_050 =  1379
+            set_left_stick_horizontal_025 =  1380
+            set_left_stick_horizontal_neg_025 =  1381
+            set_left_stick_vertical_025 =  1382
+            set_left_stick_vertical_neg_025 =  1383
+            set_right_stick_horizontal_025 =  1384
+            set_right_stick_horizontal_neg_025 =  1385
+            set_right_stick_vertical_025 =  1386
+            set_right_stick_vertical_neg_025 =  1387
+            set_left_trigger_025 =  1388
+            set_right_trigger_025 =  1389
     
 """
 Example of mapping of the World of Warcraft game use by me when doing bot or twitch play.
@@ -262,33 +353,33 @@ It is based on the Window keystroke index.
 class WowIntegerTargetSample:
     
     def __init__(self, ipv4:str = "127.0.0.1", port:int=7073, index:int=0):
-        self.wowInteger = WowIntegerTarget(ipv4, port, index)
+        self.wowInteger = SendUdpIID(ipv4, port, index, True)
         
     def jump(self):
-        self.wowInteger.push_int_action_to_target(1032)
+        self.wowInteger.push_integer(1032)
         time.sleep(0.1)
-        self.wowInteger.push_int_action_to_target(2032)  
+        self.wowInteger.push_integer(2032)  
 
      
     def all_jump(self):
-        self.wowInteger.push_int_action_to_all(1032)
+        self.wowInteger.push_integer(0,1032)
         time.sleep(0.1)
-        self.wowInteger.push_int_action_to_all(2032)  
+        self.wowInteger.push_integer(0,2032)  
 
     def press_key(self, key:int):
-        self.wowInteger.push_int_action_to_target(key)
+        self.wowInteger.push_integer(key)
     
     def release_key(self, key:int):
-        self.wowInteger.push_int_action_to_target(key+1000)
+        self.wowInteger.push_integer(key+1000)
         
     def press_then_release_key(self, key:int):
-        self.wowInteger.push_int_action_to_target(key)
-        self.wowInteger.push_int_action_to_target(key+1000)
+        self.wowInteger.push_integer(key)
+        self.wowInteger.push_integer(key+1000)
         
     def press_then_release_key_delay(self, key:int, delay:float):
-        self.wowInteger.push_int_action_to_target(key)
+        self.wowInteger.push_integer(key)
         time.sleep(delay)
-        self.wowInteger.push_int_action_to_target(key+1000)
+        self.wowInteger.push_integer(key+1000)
         
     def start_moving_left(self):
         self.press_key(IntMapping_WarcrafBasicMove.move_left)
@@ -411,96 +502,99 @@ class WowIntegerTargetSample:
         
     
     
-print("Hello World")
-player: WowIntegerTargetSample = WowIntegerTargetSample("192.168.1.37",7073,1)
-
-while True:
-    
-    bool_wow_loop = False
-    if bool_wow_loop:
-        
-        player.press_key(IntMapping_WarcrafBasicMove.tab)
-        player.press_then_release_key(IntMapping_WarcrafBasicMove.power_1)
-        time.sleep(1.8)
-        player.press_then_release_key(IntMapping_WarcrafBasicMove.power_2)
-        time.sleep(1.8)
-
-    bool_wow_loop_pet = False
-    if bool_wow_loop_pet:
-        player.press_then_release_key(IntMapping_WarcrafBasicMove.power_extra_0)
-        player.press_key(IntMapping_WarcrafBasicMove.tab)
-        time.sleep(0.1)
-        player.press_then_release_key(WowIntegerKeyboard.f1)
-        time.sleep(0.1)
-        player.press_then_release_key(WowIntegerKeyboard.f10)
-        time.sleep(0.1)
-        player.press_key(IntMapping_WarcrafBasicMove.tab)
-        time.sleep(0.2)
-        player.press_then_release_key(IntMapping_WarcrafBasicMove.power_1)
-        time.sleep(1.8)
-        player.press_then_release_key(IntMapping_WarcrafBasicMove.power_2)
-        time.sleep(1.8)
-        player.press_then_release_key(IntMapping_WarcrafBasicMove.power_3)
-        time.sleep(0.2)
-        player.press_then_release_key(IntMapping_WarcrafBasicMove.power_4)
-        time.sleep(1.8)
-        player.press_then_release_key(IntMapping_WarcrafBasicMove.power_5)
-        time.sleep(1.8)
-        player.press_then_release_key(WowIntegerKeyboard.numpad_add)
-        time.sleep(0.2)
-        player.press_then_release_key(IntMapping_WarcrafBasicMove.interact)
-        time.sleep(1.8)
-        
-    bool_10_seconds_ninja = True
-    if bool_10_seconds_ninja:
-        player.press_then_release_key_delay(IntMapping_10SecondsNinja.key_restart,0.1)
-        player.press_key(IntMapping_10SecondsNinja.key_right)
-        time.sleep(0.34)
-        player.press_then_release_key_delay(IntMapping_10SecondsNinja.key_shuriken,0.1)
-        player.press_key(IntMapping_10SecondsNinja.key_jump)
-        time.sleep(0.1)
-        player.release_key(IntMapping_10SecondsNinja.key_jump)
-        player.release_key(IntMapping_10SecondsNinja.key_right)
-        player.press_key(IntMapping_10SecondsNinja.key_left)
-        time.sleep(0.05)
-        player.press_key(IntMapping_10SecondsNinja.key_jump)
-        time.sleep(0.05)
-        player.press_key(IntMapping_10SecondsNinja.key_sword)
-        time.sleep(0.1)
-        player.release_key(IntMapping_10SecondsNinja.key_sword)
-        time.sleep(0.1)
-        player.release_key(IntMapping_10SecondsNinja.key_jump)
-        player.release_key(IntMapping_10SecondsNinja.key_left)
-        time.sleep(0.24)
-        player.press_key(IntMapping_10SecondsNinja.key_jump)
-        time.sleep(0.1)
-        player.press_key(IntMapping_10SecondsNinja.key_right)
-        time.sleep(0.1)
-        player.release_key(IntMapping_10SecondsNinja.key_jump)
-        time.sleep(0.1)
-        player.press_key(IntMapping_10SecondsNinja.key_jump)
-        time.sleep(0.05)
-        player.release_key(IntMapping_10SecondsNinja.key_jump)
-
-        time.sleep(0.04)
-        player.press_key(IntMapping_10SecondsNinja.key_shuriken)
-        time.sleep(0.1)
-        player.release_key(IntMapping_10SecondsNinja.key_shuriken)
-        time.sleep(0.1)
-        player.release_key(IntMapping_10SecondsNinja.key_right)
-        time.sleep(0.5)
-        
-        
-        
-
-    # player.press_key(ScratchToWow_WarcrafBasicMove.move_forward)
-    # time.sleep(0.1)
-    # player.release_key(ScratchToWow_WarcrafBasicMove.move_forward)
-    # time.sleep(1)
-    
-        
 if __name__ == "__main__":
+        
+    print("Hello World")
+    player: WowIntegerTargetSample = WowIntegerTargetSample("192.168.1.37",7073,1)
+
+    while True:
+        
+        bool_wow_loop = False
+        if bool_wow_loop:
+            
+            player.press_key(IntMapping_WarcrafBasicMove.tab)
+            player.press_then_release_key(IntMapping_WarcrafBasicMove.power_1)
+            time.sleep(1.8)
+            player.press_then_release_key(IntMapping_WarcrafBasicMove.power_2)
+            time.sleep(1.8)
+
+        bool_wow_loop_pet = False
+        if bool_wow_loop_pet:
+            player.press_then_release_key(IntMapping_WarcrafBasicMove.power_extra_0)
+            player.press_key(IntMapping_WarcrafBasicMove.tab)
+            time.sleep(0.1)
+            player.press_then_release_key(WowIntegerKeyboard.f1)
+            time.sleep(0.1)
+            player.press_then_release_key(WowIntegerKeyboard.f10)
+            time.sleep(0.1)
+            player.press_key(IntMapping_WarcrafBasicMove.tab)
+            time.sleep(0.2)
+            player.press_then_release_key(IntMapping_WarcrafBasicMove.power_1)
+            time.sleep(1.8)
+            player.press_then_release_key(IntMapping_WarcrafBasicMove.power_2)
+            time.sleep(1.8)
+            player.press_then_release_key(IntMapping_WarcrafBasicMove.power_3)
+            time.sleep(0.2)
+            player.press_then_release_key(IntMapping_WarcrafBasicMove.power_4)
+            time.sleep(1.8)
+            player.press_then_release_key(IntMapping_WarcrafBasicMove.power_5)
+            time.sleep(1.8)
+            player.press_then_release_key(WowIntegerKeyboard.numpad_add)
+            time.sleep(0.2)
+            player.press_then_release_key(IntMapping_WarcrafBasicMove.interact)
+            time.sleep(1.8)
+            
+        bool_10_seconds_ninja = True
+        if bool_10_seconds_ninja:
+            
+            player.press_then_release_key_delay(IntMapping_10SecondsNinja.key_restart,0.1)
+            player.press_key(IntMapping_10SecondsNinja.key_right)
+            time.sleep(0.34)
+            player.press_then_release_key_delay(IntMapping_10SecondsNinja.key_shuriken,0.1)
+            player.press_key(IntMapping_10SecondsNinja.key_jump)
+            time.sleep(0.1)
+            player.release_key(IntMapping_10SecondsNinja.key_jump)
+            player.release_key(IntMapping_10SecondsNinja.key_right)
+            player.press_key(IntMapping_10SecondsNinja.key_left)
+            time.sleep(0.05)
+            player.press_key(IntMapping_10SecondsNinja.key_jump)
+            time.sleep(0.05)
+            player.press_key(IntMapping_10SecondsNinja.key_sword)
+            time.sleep(0.1)
+            player.release_key(IntMapping_10SecondsNinja.key_sword)
+            time.sleep(0.1)
+            player.release_key(IntMapping_10SecondsNinja.key_jump)
+            player.release_key(IntMapping_10SecondsNinja.key_left)
+            time.sleep(0.24)
+            player.press_key(IntMapping_10SecondsNinja.key_jump)
+            time.sleep(0.1)
+            player.press_key(IntMapping_10SecondsNinja.key_right)
+            time.sleep(0.1)
+            player.release_key(IntMapping_10SecondsNinja.key_jump)
+            time.sleep(0.1)
+            player.press_key(IntMapping_10SecondsNinja.key_jump)
+            time.sleep(0.05)
+            player.release_key(IntMapping_10SecondsNinja.key_jump)
+
+            time.sleep(0.04)
+            player.press_key(IntMapping_10SecondsNinja.key_shuriken)
+            time.sleep(0.1)
+            player.release_key(IntMapping_10SecondsNinja.key_shuriken)
+            time.sleep(0.1)
+            player.release_key(IntMapping_10SecondsNinja.key_right)
+            time.sleep(0.5)
+            
+            
+            
+
+        # player.press_key(ScratchToWow_WarcrafBasicMove.move_forward)
+        # time.sleep(0.1)
+        # player.release_key(ScratchToWow_WarcrafBasicMove.move_forward)
+        # time.sleep(1)
+        
+            
+# if __name__ == "__main__":
     
-    HelloWorldIID.push_my_first_iid()
-    HelloWorldIID.console_loop_to_push_iid_apintio()
+#     HelloWorldIID.push_my_first_iid()
+#     HelloWorldIID.console_loop_to_push_iid_apintio()
     

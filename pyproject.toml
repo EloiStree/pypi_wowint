@@ -7,7 +7,7 @@ packages = ["src/wowint"]
 
 [project]
 name = "wowint"
-version = "2025.01.09.1137"
+version = "2025.01.10.302"
 authors = [{ name = "Eloi Stree", email = "eloistree@gmail.com" }]
 description = "Mapping of Scratch to Warcraft (keyboard and Xbox) using iid42"
 readme = "README.md"
@@ -26,3 +26,6 @@ dependencies = [
 [project.urls]
 Homepage = "https://github.com/EloiStree/pypi_wowint"
 Issues = "https://github.com/EloiStree/pypi_wowint"
+
+# python -m build
+# python -m twine upload dist/*
