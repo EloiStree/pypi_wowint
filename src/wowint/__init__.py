@@ -342,6 +342,18 @@ class IntMapping_10SecondsNinja:
     
 
 
+"""
+Example of mapping of the buuble tank game:
+https://github.com/EloiStree/2025_01_28_BubbleTankAfterJam
+
+"""
+class WowIntegerBubbleTank:
+    key_left:int = WowIntegerKeyboard.arrow_left
+    key_right:int = WowIntegerKeyboard.arrow_right
+    key_up:int = WowIntegerKeyboard.arrow_up
+    key_down:int = WowIntegerKeyboard.arrow_down
+    key_fire:int = WowIntegerKeyboard.space
+    
 
         
 """

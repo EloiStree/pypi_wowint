@@ -7,7 +7,7 @@ packages = ["src/wowint"]
 
 [project]
 name = "wowint"
-version = "2025.01.10.302"
+version = "2025.2.3448"
 authors = [{ name = "Eloi Stree", email = "eloistree@gmail.com" }]
 description = "Mapping of Scratch to Warcraft (keyboard and Xbox) using iid42"
 readme = "README.md"
